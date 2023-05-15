@@ -9,7 +9,13 @@ An app with Node.js engine, express.js, server sent events.
     ```
 * All these request are waiting for any input to be sent from the server.
 
-## producers
+## Setup
+
+* To start the docker container, run below command `docker-compose down;docker rmi $(docker images -f "dangling=true" -q); docker system prune; docker-compose up --build -d`
+
+* To stop the docker container, run `docker-compose down`
+
+## Producers
 
 * open a single tab and run below command,
     ```bash
