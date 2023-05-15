@@ -1,0 +1,14 @@
+services:
+  node-sse:
+    build: .
+    volumes: 
+      - .:/opt/node-sse/
+    # image: node-sse
+    restart: always
+    ports:
+      - 3000:3000
+    healthcheck:
+      test: curl http://localhost:3000/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 2
