@@ -29,7 +29,7 @@ app.listen(PORT, () => {
 
 function eventsHandler(req, res, next) {
   res.writeHead(200, SSE_HEADERS);
-  res.write(`data: ${JSON.stringify(`CONNECTED TO SERVER FOR SSEvents`)}\n\n`);
+  res.write(`data: CONNECTED TO SERVER FOR SSEvents\n\n`);
   
   const clientId = Date.now();
   const newClient = { id: clientId, response: res };
