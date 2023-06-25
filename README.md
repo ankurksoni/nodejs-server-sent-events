@@ -2,7 +2,7 @@
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ankurksoni_nodejs-server-sent-events&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ankurksoni_nodejs-server-sent-events)
 
-An app with Node.js engine, express.js, and server-sent events.
+An app with the latest stable Node.js engine, express.js, and server-sent events.
 
 ## Subscribers
 
