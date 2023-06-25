@@ -14,7 +14,7 @@ An app with Node.js engine, express.js, and server-sent events.
 
 ## Setup
 
-* To start the docker container, run the below command `docker-compose down; docker rmi $(docker images -f "dangling=true" -q); docker system prune; docker-compose up --build -d`
+* To start the docker container, run the below command `docker-compose down; docker rmi $(docker images -f "dangling=true" -q); docker system prune; docker-compose up --build -d; docker-compose ps`
 
 * To stop the docker container, run `docker-compose down`
 
