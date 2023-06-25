@@ -21,10 +21,14 @@ ADD app.js ./
 # https://stackoverflow.com/a/76219090/3296607
 RUN npm ci --omit=dev  --ignore-scripts && npm cache clean --force
 
-RUN echo "-----------PROJECT STRUCTURE-----------"; ls -ltr /usr/src/app; echo "---------------------------------------"
+RUN echo "-----------PROJECT STRUCTURE-----------"; ls -ltr /usr/src/app/utility; echo "---------------------------------------"
 # To bundle your app's source code inside the Docker image,
 
-COPY . /app
+COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
+COPY app.js /usr/src/app
+COPY utility/* /usr/src/app/utility/
+COPY node_modules/* /usr/src/app/node_modules/
 
 # Use the node user from the image (instead of the root user)
 USER nonroot
@@ -32,11 +36,11 @@ USER nonroot
 FROM node:18-alpine AS PROD
 
 # Copy the bundled code from the PROD_BUILD_INTERMEDIATE stage to the PROD image
-COPY --from=PROD_BUILD_INTERMEDIATE /app/node_modules /opt/node-sse/node_modules
-COPY --from=PROD_BUILD_INTERMEDIATE /app/package.json /opt/node-sse
-COPY --from=PROD_BUILD_INTERMEDIATE /app/package-lock.json /opt/node-sse
-COPY --from=PROD_BUILD_INTERMEDIATE /app/utility /opt/node-sse/utility
-COPY --from=PROD_BUILD_INTERMEDIATE /app/app.js /opt/node-sse
+COPY --from=PROD_BUILD_INTERMEDIATE /usr/src/app/node_modules /opt/node-sse/node_modules
+COPY --from=PROD_BUILD_INTERMEDIATE /usr/src/app/package.json /opt/node-sse
+COPY --from=PROD_BUILD_INTERMEDIATE /usr/src/app/package-lock.json /opt/node-sse
+COPY --from=PROD_BUILD_INTERMEDIATE /usr/src/app/utility /opt/node-sse/utility
+COPY --from=PROD_BUILD_INTERMEDIATE /usr/src/app/app.js /opt/node-sse
 
 RUN apk add --no-cache curl
 
