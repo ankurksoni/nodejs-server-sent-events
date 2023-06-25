@@ -1,6 +1,6 @@
 # The first thing we need to do is define from what image we want to build from. 
 # Here we will use the latest LTS (long term support) version 18 of node available from the Docker Hub
-FROM node:18-alpine As PROD_BUILD_INTERMEDIATE
+FROM node:18-alpine AS PROD_BUILD_INTERMEDIATE
 
 # Next we create a directory to hold the application code inside the image,
 # this will be the working directory for your application:
@@ -26,7 +26,7 @@ COPY --chown=node:node . .
 # Use the node user from the image (instead of the root user)
 USER node
 
-FROM node:18-alpine As PROD
+FROM node:18-alpine AS PROD
 
 # Copy the bundled code from the PROD_BUILD_INTERMEDIATE stage to the PROD image
 COPY --chown=node:node --from=PROD_BUILD_INTERMEDIATE /usr/src/app/node_modules /opt/node-sse/node_modules
